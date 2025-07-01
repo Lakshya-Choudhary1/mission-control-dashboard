@@ -1,0 +1,18 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "FULL STACK NASA MISSION CONTROL DASHBOADS",
+  "license": "ISC",
+  "author": "lakshya",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
