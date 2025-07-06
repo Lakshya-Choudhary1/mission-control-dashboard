@@ -1,0 +1,30 @@
+{
+  "name": "7.nasa-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install-client": "npm i --prefix client",
+    "install-server": "npm i --prefix server",
+    "install": "npm run install-server \"npm run install-client\"",
+    "client": "npm start --prefix client",
+    "server": "npm run watch --prefix server",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lakshya-Choudhary1/mission-control-dashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Lakshya-Choudhary1/mission-control-dashboard/issues"
+  },
+  "homepage": "https://github.com/Lakshya-Choudhary1/mission-control-dashboard#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.0"
+  }
+}

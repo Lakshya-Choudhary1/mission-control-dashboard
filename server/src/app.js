@@ -7,7 +7,8 @@ const app = express();
 //Access-Control-Allow-Origin
 const whiteListing_URL = ['http://localhost:3000'];
 
-app.use(cors({
+
+app.use(cors({  
      origin:(origin,callback)=>{
           if(whiteListing_URL.indexOf(origin) !== -1){
                callback(null,true);

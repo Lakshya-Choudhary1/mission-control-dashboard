@@ -1,6 +1,10 @@
 import {parse} from "csv-parse";
-import fs from "fs";
+import fs, { promises } from "fs";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 const habitablePlanets = [];
+
+const __dirname = dirname(fileURLToPath(import.meta.url)); 
 
 const isHabitablePlanet = (planet) =>{
   return planet.koi_disposition === 'CONFIRMED' 
@@ -9,19 +13,27 @@ const isHabitablePlanet = (planet) =>{
         && planet.koi_prad <1.6
 }
 
-
-fs.createReadStream('kepler_data.csv')
-  .pipe(parse({
-      comment:"#",
-      columns:true
-  }))
-  .on('data',(data) =>{
-    if(isHabitablePlanet(data)){
-      habitablePlanets.push(data)
-    }
+export const loadPlanetsData = () =>{
+  return new Promise((resolve,reject)=>{
+    fs.createReadStream(__dirname +'../../../data/' + 'kepler_data.csv')
+      .pipe(parse({
+          comment:"#",
+          columns:true
+      }))
+      .on('data',(data) =>{
+        if(isHabitablePlanet(data)){
+          habitablePlanets.push(data)
+        }
+      })
+      .on('err',(err)=>{
+        console.log('error occured : ' , err);
+        reject(err);
+      })
+      .on('end',()=>{
+        resolve();
+      })
+      
   })
-  .on('err',(err)=>{
-    console.log('error occured : ' , err);
-  })
+}
 
 export default habitablePlanets ;

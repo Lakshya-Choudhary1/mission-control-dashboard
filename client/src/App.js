@@ -9,9 +9,9 @@ import {
   createTheme,
 } from "arwes";
 
-import AppLayout from "./pages/AppLayout";
+import AppLayout from "./pages/AppLayout.js";
 
-import { theme, resources, sounds } from "./settings";
+import { theme, resources, sounds } from "./settings.js";
 
 const App = () => {
   return <ThemeProvider theme={createTheme(theme)}>
