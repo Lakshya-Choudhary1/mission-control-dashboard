@@ -12,8 +12,18 @@ const launch1 = {
      success:true
 }
 
-launches.set(launch1.flightNumber,launch1)
+launches.set(launch1.flightNumber,launch1);
 
+export const existsLaunchWithId = (launchId) =>{
+    return launches.has(launchId);
+}
+
+export const deleteLaunch = (launchId) =>{
+     const launch = launches.get(launchId);
+     launch.success = false;
+     launch.upcoming = false;
+     return launch;
+}
 export const addNewLaunch = (launch) =>{
      latestFlightNumber++;
      launches.set(latestFlightNumber,Object.assign(launch,{

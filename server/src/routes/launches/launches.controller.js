@@ -23,3 +23,17 @@ export const addNewLaunch = (req,res)=>{
     launchesModel.addNewLaunch(launch);
     return res.status(201).json(launch);
 }
+
+export const deleteLaunch = (req,res) =>{
+    const launchId = parseInt(req.params.id);
+    
+    const aborted = launchesModel.deleteLaunch(launchId);
+    if(!aborted){
+        return res.status(404).json({
+            error:'no launch exists'
+        })
+    }
+   
+    
+    return res.status(200).json(aborted);
+}
