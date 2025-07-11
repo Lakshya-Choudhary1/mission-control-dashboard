@@ -16,7 +16,7 @@ A full-stack NASA mission control dashboard to manage space launches, view plane
 
 | Frontend | Backend | Database | Others |
 |----------|---------|----------|--------|
-| React    | Node.js | MongoDB  | Arwes UI, REST API, CORS, dotenv |
+| React    | Node.js | upcoming... | Arwes UI, REST API, CORS, dotenv |
 
 ## 📂 Folder Structure
 root
