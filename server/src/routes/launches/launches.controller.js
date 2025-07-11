@@ -6,13 +6,20 @@ export const getAllLaunches = (req,res) =>{
 }
 
 export const addNewLaunch = (req,res)=>{
-     try{
-          const launch = req.body;
-          launch.launchDate = new Date(launch.launchDate);
-          launchesModel.addNewLaunch(launch);
-          return res.status(201).json(launch);
-     }catch(err){
-          console.log(err)
-          res.status(209).send(err);
-     }
+    const launch = req.body;
+    if(!launch.mission || !launch.rocket || !launch.launchDate || !launch.target){
+        return res.status(200).json({
+            'error':'Mission required launch property',
+        })
+    }
+
+    launch.launchDate = new Date(launch.launchDate);
+    if(isNaN(launch.launchDate)){
+        return res.status(200).json({
+            'error':'Invalid launch date',
+        });
+    }
+    
+    launchesModel.addNewLaunch(launch);
+    return res.status(201).json(launch);
 }

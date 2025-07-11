@@ -10,7 +10,7 @@
     "client": "npm start --prefix client",
     "server": "npm run watch --prefix server",
     "watch": "concurrently \"npm run server\" \"npm run client\"",
-    "deploy": "concurrently \"npm run build --prefix client\"  \"npm start --prefix server\"",
+    "deploy": "concurrently  \"npm run build --prefix client\" \"npm start --prefix server\" ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

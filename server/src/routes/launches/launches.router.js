@@ -3,6 +3,6 @@ import * as launchesController from './launches.controller.js';
 
 const router = express.Router();
 
-router.get('/launches',launchesController.getAllLaunches);
-router.post('/launches',launchesController.addNewLaunch);
+router.get('/',launchesController.getAllLaunches);
+router.post('/',launchesController.addNewLaunch);
 export default router;
