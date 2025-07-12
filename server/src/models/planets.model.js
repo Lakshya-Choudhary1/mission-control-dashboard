@@ -1,10 +1,8 @@
 import {parse} from "csv-parse";
 import fs, { promises } from "fs";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
+import path from "path";
 const habitablePlanets = [];
-
-const __dirname = dirname(fileURLToPath(import.meta.url)); 
+ 
 
 const isHabitablePlanet = (planet) =>{
   return planet.koi_disposition === 'CONFIRMED' 
@@ -15,7 +13,7 @@ const isHabitablePlanet = (planet) =>{
 
 export const loadPlanetsData = () =>{
   return new Promise((resolve,reject)=>{
-    fs.createReadStream(__dirname +'../../../data/' + 'kepler_data.csv')
+    fs.createReadStream(path.join(__dirname ,'../../../data/' , 'kepler_data.csv'))
       .pipe(parse({
           comment:"#",
           columns:true
