@@ -1,41 +1,58 @@
-const launches = new Map();
+import launchesDatabase from "./launches.schema.js";
+import planetsDatabase from "./planets.schema.js";
 
-let latestFlightNumber = 100;
-const launch1 = {
-     flightNumber:100,
-     mission: 'Kepler Exploration X',
-     rocket:'Explorer IS1',
-     launchDate:new Date('December 27, 2030'),
-     target:'Kepler-442 b',
-     customers:['ZTM','HYE-VSM'],
-     upcoming:true,
-     success:true
+
+const DEFAULT_FLIGHT_NUMBER = 100;
+const getLatestFlightNumber = async() =>{
+     const launch  = await launchesDatabase
+          .findOne()
+          .sort('-flightNumber');
+
+     if(!launch) return DEFAULT_FLIGHT_NUMBER;
+
+     return ++launch.flightNumber;
 }
 
-launches.set(launch1.flightNumber,launch1);
-
-export const existsLaunchWithId = (launchId) =>{
-    return launches.has(launchId);
+export const launchIdExists =  async(launchId) =>{
+     return  await launchesDatabase.findOne({
+          flightNumber:launchId
+     })
 }
 
-export const deleteLaunch = (launchId) =>{
-     const launch = launches.get(launchId);
-     launch.success = false;
-     launch.upcoming = false;
-     return launch;
+const saveLaunches =async(launch)=>{
+     const planets =  await planetsDatabase.findOne({
+          keplerName:launch.target,
+     })
+     if(!planets){
+          throw new Error('NOT PLANETS EXISTS')
+     }
+     await launchesDatabase.findOneAndUpdate({
+          flightNumber: launch.flightNumber,
+     },launch,{upsert:true,})
 }
-export const addNewLaunch = (launch) =>{
-     latestFlightNumber++;
-     launches.set(latestFlightNumber,Object.assign(launch,{
+
+
+// launches.set(launch1.flightNumber,launch1);
+export const deleteLaunch =  async(launchId) =>{
+     const launch = await launchesDatabase.updateOne(
+          {    flightNumber:launchId
+          },{success:false,upcoming:false})
+     return launch.acknowledged === true;
+}
+export const addNewLaunch = async(launch) =>{
+     const latestFlightNumber = await getLatestFlightNumber();
+     const newLaunch = Object.assign(launch,{
           flightNumber:latestFlightNumber,
-          customers:['ZTM','HYE-VSM'],
+          success:true,
           upcoming:true,
-          success:true 
-     }));
+          customers:['ZTM','HYE-VSM'],
+     })
+     await saveLaunches(newLaunch);
+     return newLaunch
 }
 
-export const getAllLaunches = () =>{
-     return Array.from(launches.values());
+export const getAllLaunches = async() =>{
+     return await launchesDatabase.find({},{'__v':0,'_id':0});
 }
 
 

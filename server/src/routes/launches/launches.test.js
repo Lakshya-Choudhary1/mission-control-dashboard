@@ -1,8 +1,14 @@
 import request from "supertest";
 import app from '../../app.js'
-
-describe('TEST GET /launches',()=>{
+import mongoose from "mongoose";
+import  dotenv from 'dotenv'
+dotenv.config()
+describe('Launches API TEST',()=>{
      
+describe('TEST GET /launches',()=>{
+     beforeAll(async()=>{
+          mongoose.connect(process.env.MONGO_URL)
+     })
      test('It should response with a 200 success',async ()=>{
           const response =await request(app)
                .get('/launches')
@@ -57,6 +63,6 @@ describe('TEST POST /launches',()=>{
                })
                .expect("Content-Type",/json/)
                .expect(400)
-
+          })
      })
 })

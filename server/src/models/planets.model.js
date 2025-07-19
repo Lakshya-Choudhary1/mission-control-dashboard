@@ -1,8 +1,10 @@
 import {parse} from "csv-parse";
 import fs, { promises } from "fs";
 import path,{dirname} from "path";
-const habitablePlanets = [];
+
 import { fileURLToPath } from "url";
+import planets from "./planets.schema.js";
+
 
 const _dirname = dirname(fileURLToPath(import.meta.url))
 const isHabitablePlanet = (planet) =>{
@@ -19,12 +21,16 @@ export const loadPlanetsData = () =>{
           comment:"#",
           columns:true
       }))
-      .on('data',(data) =>{
+      .on('data',async (data) =>{
         if(isHabitablePlanet(data)){
-          habitablePlanets.push(data)
+          await planets.updateOne(
+            {keplerName : data.kepler_name},
+            {keplerName : data.kepler_name},
+            {upsert:true}
+          )
         }
       })
-      .on('err',(err)=>{
+      .on('error',(err)=>{
         console.log('error occured : ' , err);
         reject(err);
       })
@@ -35,4 +41,6 @@ export const loadPlanetsData = () =>{
   })
 }
 
-export default habitablePlanets ;
+export const getPlanet = async () => {
+  return await planets.find({},{'__v':0,'_id':0});
+};

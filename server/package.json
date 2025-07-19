@@ -6,6 +6,7 @@
   "author": "lakshya",
   "type": "module",
   "main": "src/server.js",
+  
   "scripts": {
     "test": "jest",
     "test-watch": "jest --watch",

@@ -1,11 +1,11 @@
 import * as launchesModel from "../../models/launches.model.js";
 
 
-export const getAllLaunches = (req,res) =>{
-    return res.status(200).json(launchesModel.getAllLaunches());
+export const getAllLaunches = async(req,res) =>{
+    return res.status(200).json(await launchesModel.getAllLaunches());
 }
 
-export const addNewLaunch = (req,res)=>{
+export const addNewLaunch = async(req,res)=>{
     const launch = req.body;
     if(!launch.mission || !launch.rocket || !launch.launchDate || !launch.target){
         return res.status(400).json({
@@ -20,20 +20,19 @@ export const addNewLaunch = (req,res)=>{
         });
     }
     
-    launchesModel.addNewLaunch(launch);
-    return res.status(201).json(launch);
+    const added = await  launchesModel.addNewLaunch(launch);
+    return res.status(201).json(added);
 }
 
-export const deleteLaunch = (req,res) =>{
+export const deleteLaunch = async(req,res) =>{
     const launchId = parseInt(req.params.id);
-    
-    const aborted = launchesModel.deleteLaunch(launchId);
-    if(!aborted){
+    const launch  = await launchesModel.launchIdExists(launchId)
+    if(!launch){
         return res.status(404).json({
             error:'no launch exists'
         })
     }
-   
-    
-    return res.status(200).json(aborted);
+    const aborted = await launchesModel.deleteLaunch(launchId);
+    if(!aborted) return res.status(400).json({acknoledged:aborted});
+    return res.status(200).json({acknoledged:aborted,status:"successfull deletion"});
 }
