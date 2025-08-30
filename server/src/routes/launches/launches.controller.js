@@ -1,8 +1,10 @@
 import * as launchesModel from "../../models/launches.model.js";
-
+import getPagination from "../../services/query.js"
 
 export const getAllLaunches = async(req,res) =>{
-    return res.status(200).json(await launchesModel.getAllLaunches());
+    const query = req.query;
+    const {skip,limit} = getPagination(query)
+    return res.status(200).json(await launchesModel.getAllLaunches(skip,limit));
 }
 
 export const addNewLaunch = async(req,res)=>{

@@ -5,8 +5,9 @@ mongoose.connection.once('connect',()=>{
 })
 
 mongoose.connection.on('error',()=>{
-     console.error({'err':error})
+     console.error({'err':'mongo error'});
 })
+
 const initDb = async(MONGO_URL)=>{
     await mongoose.connect(MONGO_URL);
 } 
