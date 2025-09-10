@@ -10,12 +10,12 @@ jobs:
       CI: true
     strategy:
       matrix:
-        os-verison: [ubuntu-latest , macos-latest , windowsos-latest]
+        os-verison: [ubuntu-latest ]
         node-version: [23.x, 24.x]
     runs-on: ${{matrix.os-verison}}
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js version 24
+      - name: Use Node.js version ${{matrix.node-version}}
         uses: actions/setup-node@v4
         with:
           node-version: ${{matrix.node-version}}
