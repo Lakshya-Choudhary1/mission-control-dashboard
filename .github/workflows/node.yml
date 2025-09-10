@@ -1,12 +1,15 @@
 name : "NASA SPACE CONTROL APP"
+
 on: 
   push: 
     branches: [master]
-  pull:
+  pull_requests:
     branches: [master]
+
 jobs:
   build:
-    runs-on: [ubuntu-latest , windows-latest , macos-latest]
+   runs-on: [ubuntu-latest, windows-latest, macos-latest]
+
     steps:
       - uses: actions/checkout@v4
       - name: use node.js version 24
