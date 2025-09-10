@@ -20,4 +20,4 @@ jobs:
 
       - run: npm install
 
-      - run: npm run build --prefix clien
+      - run: npm run build --prefix client
