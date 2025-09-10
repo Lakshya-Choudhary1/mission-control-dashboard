@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os-verison: [ubuntu-latest , macos-latest , windowsos-latest]
-        node-version: [14.x , 16.x , 24.x]
+        node-version: [23.x, 24.x]
     runs-on: ${{matrix.os-verison}}
     steps:
       - uses: actions/checkout@v4
