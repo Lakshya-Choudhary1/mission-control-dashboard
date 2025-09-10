@@ -1,26 +1,26 @@
 name : "NASA SPACE CONTROL APP"
-
 on: 
   push: 
     branches: [master]
   pull_request:
     branches: [master]
-
 jobs:
   build:
-    runs-on: ubuntu-latest
-
+    env: 
+      CI: true
+    strategy:
+      matrix:
+        os-verison: [ubuntu-latest , macos-latest , windowsos-latest]
+        node-version: [14.x , 16.x , 24.x]
+    runs-on: ${{matrix.os-verison}}
     steps:
       - uses: actions/checkout@v4
-
       - name: Use Node.js version 24
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
-
+          node-version: ${{matrix.node-version}}
       - name: installing dependencies
         run: npm install
-
-
       - run: npm run build 
         working-directory: client
+      - run: npm test
