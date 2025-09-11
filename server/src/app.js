@@ -23,7 +23,7 @@ app.use('/v1',api);
 
 //home route (https://localhost:5000)
 app.get('/',(req,res)=>{
-     res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+     res.sendFile(path.join(_dirname, '..', 'public', 'index.html'));
 })
 
 export default app;

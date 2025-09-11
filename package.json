@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/Lakshya-Choudhary1/mission-control-dashboard#readme",
   "devDependencies": {
-    "concurrently": "^9.2.0"
+    "concurrently": "^9.2.0",
+    "cross-env": "^10.0.0"
   }
 }

@@ -9,6 +9,9 @@ describe('TEST GET /launches',()=>{
      beforeAll(async()=>{
           mongoose.connect(process.env.MONGO_URL)
      })
+     afterAll(async () => {
+          await mongoose.connection.close();
+          });
      test('It should response with a 200 success',async ()=>{
           const response =await request(app)
                .get('/v1/launches')

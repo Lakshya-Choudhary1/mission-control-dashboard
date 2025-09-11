@@ -11,6 +11,9 @@ describe('TEST GET /planests',()=>{
      beforeAll(async()=>{
           mongoose.connect(process.env.MONGO_URL)
      })
+     afterAll(async () => {
+          await mongoose.connection.close();
+     });
      test('resonse with 200 success', async() => {
           const response = await request(app)
                .get('/v1/planets')

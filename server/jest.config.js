@@ -1,7 +1,5 @@
 // jest.config.js
 export default {
-  transform: {
-    "^.+\\.js$": "babel-jest"
-  },
-  testEnvironment: "node"
+  testEnvironment: "node",
+  transform: {}, // disable Babel transforms, let Node handle ESM
 };

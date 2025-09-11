@@ -93,7 +93,7 @@ export const addNewLaunch = async(launch) =>{
           keplerName:launch.target,
      })
      if(!planets){
-          throw new Error('NOT PLANETS EXISTS')
+          return {err:"planet already exist"};
      }
      const latestFlightNumber = await getLatestFlightNumber();
      const newLaunch = Object.assign(launch,{
