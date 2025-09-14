@@ -12,6 +12,7 @@ jobs:
       matrix:
         os-verison: [ubuntu-latest ]
         node-version: [23.x, 24.x]
+        mongodb-version : [8.x]
     runs-on: ${{matrix.os-verison}}
     steps:
       - uses: actions/checkout@v4
@@ -19,6 +20,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{matrix.node-version}}
+      - name : use MongoDB in GitHub Actions
+        uses: supercharge/mongodb-github-action@1.12.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
       - name: installing dependencies
         run: npm install
       - run: npm run build 
