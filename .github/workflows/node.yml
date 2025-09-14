@@ -8,6 +8,7 @@ jobs:
   build:
     env: 
       CI: true
+      MONGO_URL: mongodb+srv://nasa-api:sZ1eOGcbe83ytEFr@cluster0.3swbr4t.mongodb.net/?retryWrites=true&w=majority&appName=Cluste
     strategy:
       matrix:
         os-verison: [ubuntu-latest ]
