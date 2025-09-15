@@ -8,12 +8,12 @@ jobs:
   build:
     env: 
       CI: true
-      MONGO_URL: mongodb+srv://nasa-api:sZ1eOGcbe83ytEFr@cluster0.3swbr4t.mongodb.net/?retryWrites=true&w=majority&appName=Cluste
+      MONGO_URL: mongodb://localhost/nasa
     strategy:
       matrix:
         os-verison: [ubuntu-latest ]
         node-version: [23.x, 24.x]
-        mongodb-version : [8.x]
+        mongodb-version : [4.x]
     runs-on: ${{matrix.os-verison}}
     steps:
       - uses: actions/checkout@v4
