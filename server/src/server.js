@@ -11,7 +11,7 @@ const MONGO_URL = process.env.MONGO_URL;
 const server = createServer(app);
 
 const startServer = async() =>{
-     await initDb('mongodb+srv://nasa-api:sZ1eOGcbe83ytEFr@cluster0.3swbr4t.mongodb.net/')
+     await initDb(MONGO_URL)
      await loadPlanetsData();     
      await loadLaunchesData();
      server.listen(PORT,()=>{
