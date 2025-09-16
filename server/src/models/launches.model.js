@@ -65,19 +65,20 @@ export const loadLaunchesData = async()=>{
           }
      })
 
-     response.data.docs.forEach(async(e) => {
+     for (const e of response.data.docs) {
           const launch = {
-               flightNumber:e.flight_number,
-               mission:e.name,
-               rocket:e.rocket.name,
-               launchDate:new Date(e.date_local),
-               target:'NOT Applicable',
-               upcoming:e.upcoming,
-               success:e.success,
-               customers:e.payloads.flatMap(val=>val.customers)
-          }
-          await saveLaunches(launch)
-     });
+               flightNumber: e.flight_number,
+               mission: e.name,
+               rocket: e.rocket.name,
+               launchDate: new Date(e.date_local),
+               target: 'NOT Applicable',
+               upcoming: e.upcoming,
+               success: e.success,
+          customers: e.payloads.flatMap(val => val.customers)
+    };
+    await saveLaunches(launch);
+}
+
 }
 
 // launches.set(launch1.flightNumber,launch1);
