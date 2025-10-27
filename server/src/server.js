@@ -6,7 +6,7 @@ import {loadLaunchesData} from "./models/launches.model.js"
 import initDb from "./services/mongo.js"
 
 dotenv.config();
-const PORT = process.env.PORT || 8888 ;
+const PORT = process.env.PORT || 8000 ;
 const MONGO_URL = process.env.MONGO_URL;
 const server = createServer(app);
 

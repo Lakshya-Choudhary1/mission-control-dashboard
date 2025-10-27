@@ -10,13 +10,12 @@ import api from './routes/api.js';
 const app = express();
 const _dirname = dirname(url.fileURLToPath(import.meta.url));
 
-const accessLogStream = fs.createWriteStream(_dirname+'/../log/access.log',{flags:'a'});
 //Access-Control-Allow-Origin
 app.use(cors({  
      origin:['http://localhost:3000']
 }));
 app.use(express.static(path.join(_dirname,'..','public')))
-app.use(morgan('combined',{stream:accessLogStream}));
+app.use(morgan('tiny'));
 app.use(express.json());
 app.use('/v1',api);
 
