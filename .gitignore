@@ -3,7 +3,7 @@
 client/.env
 server/.env
 .env
- 
+log
 # dependencies
 /node_modules
 server/node_modules
